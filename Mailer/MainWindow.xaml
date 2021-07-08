@@ -3,42 +3,121 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mycontrols="clr-namespace:MyControls;assembly=MyControls"
         xmlns:local="clr-namespace:Mailer"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
+        
         Title="MainWindow" Height="450" Width="800" x:Name="mainWindow">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="111*"/>
-            <ColumnDefinition Width="289*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="50*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
+        <TabControl Grid.Row="1" Name="tcTabControl" TabStripPlacement="Right">
+            <TabItem Header="Отправить">
+                <Grid ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Журнал">
+                <Grid ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Настройки">
+                <Grid ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Images/groups.ico"/>
+                                <TextBlock>Формирование группы рассылки</TextBlock>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
+                        <Image Source="/Images/groups.ico" Width="20" HorizontalAlignment="Left"/>
+                        <TextBlock Margin="3">Группы</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="83*"/>
+                        <ColumnDefinition Width="179*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0" VerticalAlignment="Top" Width="Auto" Height="65" Grid.ColumnSpan="2">
+                        <ToolBar Width="auto" Height="auto" x:Name="tbSender">
+                            <Label x:Name="lSender" Width="130" Height="25">Выбрать отправителя</Label>
+                            <ComboBox x:Name="cbSenderSelect" SelectedIndex="0" Width="100" IsReadOnly="True" ToolTip="Выбрать email отправителя">
+                            </ComboBox>
+                            <Button x:Name="btnAddSender" ToolTip="Добавить" fa:Awesome.Content="Solid_CartPlus"/>
+                            <!--<Image Source="/Images/New Add64.png" />-->
 
-        <Menu Height="20" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,5,0,5">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Exit" x:Name="miExit" Click="miExit_Click" />
-            </MenuItem>
-            <MenuItem Header="Help">
-                <MenuItem Header="About" x:Name="miAbout" Click="miAbout_Click"/>
-            </MenuItem>
+                            <Button x:Name="btnEditSender" ToolTip="Редактировать" fa:Awesome.Content="Solid_Edit"/>
+                            <!--<Image Source="/Images/New Edit64.png" />-->
 
-        </Menu>
-        <Button x:Name="btnSent" HorizontalAlignment="Left" Margin="127,53,0,0" Grid.Row="2" VerticalAlignment="Top" Click="btnSent_Click">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Images/cache.png" Width="30" />
 
-                <TextBlock Text="Sent" VerticalAlignment="Center" Height="21" Width="42"/>
-            </StackPanel>
-        </Button>
-        <TextBox x:Name="tbLogin" Grid.Column="1" HorizontalAlignment="Left" Margin="40,17,0,0" Grid.Row="1" Text="geekbrains2021@gmail.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>
-        <PasswordBox x:Name="pbPassword" Grid.Column="1" HorizontalAlignment="Left" Margin="40,58,0,0" Grid.Row="1" Password="password" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbTo" Grid.Column="1" HorizontalAlignment="Left" Margin="40,88,0,0" Grid.Row="1" Text="geekbrains2021@gmail.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
-        <TextBox x:Name="tbText" AcceptsReturn="True" Grid.Column="1" HorizontalAlignment="Left" Margin="33,123,0,0" Grid.Row="1" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="72"/>
-        <TextBox x:Name="tbLog" IsReadOnly="True" AcceptsReturn="True" Grid.Column="1" HorizontalAlignment="Left" Margin="30,9,0,0" Grid.Row="2" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="507" Height="72"/>
+                            <Button x:Name="btnDeleteSender" ToolTip="Удалить" fa:Awesome.Content="Solid_Recycle">
+                                <!--<Image Source="/Images/New Remove64.png" />-->
 
+                            </Button>
+
+                        </ToolBar>
+                        <ToolBar x:Name="tbSmtp" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="400" Band="1" BandIndex="0">
+                            <Label x:Name="lSmtp" Content="Выбрать smtp-сервер" Height="25" Width="Auto"/>
+                            <ComboBox x:Name="cbSmtpSelect" Height="25" Margin="0" VerticalAlignment="Top" Width="170" SelectedIndex="0" ToolTip="Выбрать smtp-сервер"/>
+                            <Button x:Name="btnAddSmtp" Width="25" Height="25" ToolTip="Добавить">
+                                <Image Source="/Images/New Add64.png" />
+                            </Button>
+                            <Button x:Name="btnEditSmtp" Width="25" Height="25" ToolTip="Редактировать">
+                                <Image Source="/Images/New Edit64.png" />
+                            </Button>
+                            <Button x:Name="btnDeleteSmtp" Width="25" Height="25" ToolTip="Удалить">
+                                <Image Source="/Images/New Remove64.png" />
+                            </Button>
+                        </ToolBar>
+                        <ToolBar x:Name="tbPlanner" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="280" Band="0" BandIndex="1"/>
+                        <ToolBar x:Name="tbAddressee" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="280" Band="1" BandIndex="1" >
+                            <Label x:Name="lAddressee" Content="Список адресатов" Height="25" Width="Auto"/>
+                            <Button x:Name="btnAddAddressee" Width="25" Height="25" ToolTip="Добавить">
+                                <Image Source="/Images/New Add64.png" />
+                            </Button>
+                            <Button x:Name="btnEditAddressee" Width="25" Height="25" ToolTip="Редактировать">
+                                <Image Source="/Images/New Edit64.png" />
+                            </Button>
+                            <Button x:Name="btnDeleteAddressee" Width="25" Height="25" ToolTip="Удалить">
+                                <Image Source="/Images/New Remove64.png" />
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <DataGrid x:Name="dgEmails" Grid.Row="1" Width="782" Height="398" Grid.ColumnSpan="2" Margin="2,0"/>
+                </Grid>
+
+            </TabItem>
+       </TabControl>
     </Grid>
 </Window>
