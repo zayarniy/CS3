@@ -44,7 +44,7 @@ namespace Mailer
     }
 
 
-    public class Account : INotifyPropertyChanged
+    public class Account 
     {
         public Account()
         {
@@ -56,8 +56,7 @@ namespace Mailer
             this.Password = password;
             Debug.WriteLine("Acount created");
         }
-        private string login;
-        private string password;
+
 
         //Add something
 
@@ -66,31 +65,9 @@ namespace Mailer
         //Lesson2
         static int Counter { get; set; } = 0;
 
-        public string Login
-        {
-            get => login; set
-            {
+        public string Login { get; set; }
 
-                if (value != login)
-                {
-                    login = value;
-                    System.Diagnostics.Debug.WriteLine("Login sets");
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Login"));
-                }
-            }
-        }
-
-        public string Password { get => password; set
-            {
-                
-                if (value != password)
-                {
-                    password = value;
-                    System.Diagnostics.Debug.WriteLine("Password sets");
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Password"));
-                }
-            }
-        }
+        public string Password { get; set; }
 
 
         #region Comment

@@ -10,6 +10,41 @@ namespace Mailer.ViewModel
     {
         public Mailer.Account Account { get; set; } = new Account() { Login = "login", Password = "password" };
 
+
+        public string Login
+        {
+            get
+            {
+                return Account.Login;
+            }
+            set
+            {
+                if (value!=Account.Login)
+                {
+                    Account.Login = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Login"));
+                }
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return Account.Password;
+            }
+            set
+            {
+                if (value != Account.Password)
+                {
+                    Account.Password = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Password"));
+                }
+            }
+        }
+
+
+
         public List<string> ListAccounts
         {
             get
@@ -26,7 +61,7 @@ namespace Mailer.ViewModel
             }
         }
 
-        public ICommand Login
+        public ICommand ClickLogin
         {
             get
             {
@@ -63,17 +98,17 @@ namespace Mailer.ViewModel
 
         private bool CanLogin(object obj)
         {
-            return !(Account.Login == "" || Account.Password == "");
+            return !(Login == "" || Password == "");
         }
         private void Clear(object obj)
         {
-            Account.Login = "";
-            Account.Password = "";
+            Login = "";
+            Password = "";
         }
 
         private bool CanClear(object obj)
         {
-            return !(Account.Login == "" && Account.Password == "");
+            return !(Login == "" && Password == "");
         }
 
 

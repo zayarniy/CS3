@@ -13,10 +13,10 @@
     </Window.DataContext>
     <StackPanel>
         <TextBlock>Логин</TextBlock>
-        <TextBox Name="tbLogin" Text="{Binding Path=Account.Login,  UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <TextBox Name="tbLogin" Text="{Binding Path=Login,  UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
         <TextBlock>Пароль</TextBlock>
-        <TextBox Name="tbPassword" Text="{Binding Path=Account.Password, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-        <Button x:Name="btLogin" Content="Login" Command="{Binding Login}"/>
+        <TextBox Name="tbPassword" Text="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <Button x:Name="btLogin" Content="Login" Command="{Binding ClickLogin}"/>
         <Button Command="{Binding ClickClear}" x:Name="btnClear" Content="Clear"/>
         <ComboBox ItemsSource="{Binding ListAccounts}" Height="100"/>
         <Button Command="{Binding ClickAddAccount}" x:Name="btnAddAcount" Content="Add account"/>
