@@ -22,7 +22,7 @@ namespace Mailer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Model Model { get; } = new Model();
+        
 
         public MainWindow()
         {

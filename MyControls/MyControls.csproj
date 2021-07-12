@@ -5,6 +5,7 @@
     <UseWPF>true</UseWPF>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>123.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

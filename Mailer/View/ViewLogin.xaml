@@ -1,0 +1,24 @@
+﻿<Window x:Class="Mailer.View.ViewLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mailer.View"
+        xmlns:viewmodel="clr-namespace:Mailer.ViewModel"
+        mc:Ignorable="d"
+        
+        Title="ViewLogin" Height="300" Width="343" x:Name="wndLogin">
+    <Window.DataContext>
+        <viewmodel:ViewModelAccess x:Name="vmAccess"/>
+    </Window.DataContext>
+    <StackPanel>
+        <TextBlock>Логин</TextBlock>
+        <TextBox Name="tbLogin" Text="{Binding Path=Account.Login,  UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <TextBlock>Пароль</TextBlock>
+        <TextBox Name="tbPassword" Text="{Binding Path=Account.Password, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <Button x:Name="btLogin" Content="Login" Command="{Binding Login}"/>
+        <Button Command="{Binding ClickClear}" x:Name="btnClear" Content="Clear"/>
+        <ComboBox ItemsSource="{Binding ListAccounts}" Height="100"/>
+        <Button Command="{Binding ClickAddAccount}" x:Name="btnAddAcount" Content="Add account"/>
+    </StackPanel>
+</Window>
