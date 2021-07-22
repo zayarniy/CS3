@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Mailer
 {
@@ -92,5 +93,15 @@ namespace Mailer
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
+    public class Mail
+    {
+        public string To { get; set; }
+
+    }
+
+    public class Database
+    {
+        public ObservableCollection<string> ListTo { get; } = new ObservableCollection<string>(){ "mail@mail.com", "yandex@yandex.ru" };
+    }
 
 }

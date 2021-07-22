@@ -6,9 +6,22 @@
         xmlns:mycontrols="clr-namespace:MyControls;assembly=MyControls"
         xmlns:local="clr-namespace:Mailer"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
-        mc:Ignorable="d"
-        
+        xmlns:vm="clr-namespace:Mailer.ViewModel"
+        mc:Ignorable="d"        
         Title="MainWindow" Height="450" Width="800" x:Name="mainWindow">
+    <Window.DataContext>
+        <vm:ViewModelMain x:Name="vmMain"/>
+    </Window.DataContext>
+    <Window.Resources>
+    <ControlTemplate x:Key="TextBoxErrorTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Border BorderBrush="Violet" BorderThickness="4">
+                <AdornedElementPlaceholder />
+            </Border>
+            <TextBlock Foreground="Red"  FontWeight="Bold">!!!</TextBlock>
+        </StackPanel>
+    </ControlTemplate>
+    </Window.Resources>
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,13 +34,27 @@
 
         <TabControl Grid.Row="1" Name="tcTabControl" TabStripPlacement="Right">
             <TabItem Header="Отправить">
-                <Grid ShowGridLines="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                </Grid>
+                <StackPanel>
+                    <Label Content="Название письма:" Width="auto"/>
+                    <TextBox Grid.Row="1" Text="{Binding Subject}"  x:Name="tbSubject" Width="200" HorizontalAlignment="Left" AcceptsReturn="True" TextWrapping="Wrap" />
+                    <Label Content="Содержимое письма:" Width="auto"/>
+                    <TextBox Grid.Row="1"  x:Name="tbBody" Text="{Binding Body}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="100" AcceptsReturn="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <Label Content="From"/>
+                    <ComboBox x:Name="cbFrom" ItemsSource="{Binding FromList}" Text="{Binding From}">
+                    </ComboBox>
+                    <Label Content="To"/>
+                    <ComboBox ItemsSource="{Binding DataBaseListTo}" x:Name="cbTo" IsEditable="True" Validation.ErrorTemplate="{StaticResource TextBoxErrorTemplate}">
+                        <ComboBox.Text>
+                            <Binding Path="MailTo">
+                            <Binding.ValidationRules>
+                                <vm:EMailValidationRule/>
+                            </Binding.ValidationRules>
+                            </Binding>
+                        </ComboBox.Text>
+                    </ComboBox>
+                    <Button   x:Name="btnSend" Width="auto" FontWeight="Medium" Content="Отправить немедленно" Command="{Binding SendAtOnce}"/>
+                    <Button   x:Name="btnAddNewMail" Width="auto" FontWeight="Medium" Content="Добавить в планировщик" Command="{Binding AddNewMail}"/>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Журнал">
                 <Grid ShowGridLines="True">
